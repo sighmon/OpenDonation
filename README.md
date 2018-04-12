@@ -1,6 +1,8 @@
 # OpenDonation
 An Open Source donation app for Android making use of the Square card reader.
 
+<img width="100%" src="OpenDonation_screenshots.jpg" />
+
 ## Register your app
 Don’t forget to register your app under your Square dev account: <https://connect.squareup.com/apps>
 
