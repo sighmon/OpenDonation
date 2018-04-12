@@ -1,6 +1,19 @@
 # OpenDonation
 An Open Source donation app for Android making use of the Square card reader.
 
+## Register your app
+Don’t forget to register your app under your Square dev account: <https://connect.squareup.com/apps>
+
+You’ll need your package name: `com.company.opendonation`
+
+And the fingerprint of your debug certificate, which you can find with this one-liner:
+
+```bash
+$ keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+```
+
+Full instructions: <https://docs.connect.squareup.com/articles/android-app-fingerprint>
+
 ## Secrets
 Secrets are stored in a file you’ll need to create:
 
