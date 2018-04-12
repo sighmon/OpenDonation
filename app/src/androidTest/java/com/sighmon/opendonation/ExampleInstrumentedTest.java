@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("sighmon.com.opendonation", appContext.getPackageName());
+        assertEquals("com.sighmon.opendonation", appContext.getPackageName());
     }
 }
