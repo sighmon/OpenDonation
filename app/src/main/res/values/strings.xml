@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Open Donation</string>
+    <string name="donation_amount">$5</string>
+    <string name="donation_description">Donate by swiping your card on the white box.</string>
+</resources>
