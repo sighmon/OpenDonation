@@ -1,4 +1,4 @@
-package sighmon.com.opendonation;
+package com.sighmon.opendonation;
 
 import org.junit.Test;
 

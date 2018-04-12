@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "sighmon.com.opendonation"
+        applicationId "com.sighmon.opendonation"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1

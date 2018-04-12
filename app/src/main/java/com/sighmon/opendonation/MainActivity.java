@@ -1,4 +1,4 @@
-package sighmon.com.opendonation;
+package com.sighmon.opendonation;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         posClient = PosSdk.createClient(this, getString(R.string.square_client_id));
 
         // Try a transaction
+        // TODO: get the user to tap the screen to start a transaction after one finishes or fails?
         startTransaction();
     }
 

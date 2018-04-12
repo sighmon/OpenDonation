@@ -1,4 +1,4 @@
-package sighmon.com.opendonation;
+package com.sighmon.opendonation;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
