@@ -1,5 +1,5 @@
 # OpenDonation
-An Open Source donation app for Android making use of the Square card reader.
+An Open Source donation app for Android making use of the [Square](https://squareup.com) card reader.
 
 <img width="100%" src="OpenDonation_screenshots.jpg" />
 
@@ -42,4 +42,4 @@ getString(R.string.square_client_id);
 Follow the guide to get YOUR_CLIENT_ID: <https://docs.connect.squareup.com/articles/point-of-sale-api-android>
 
 ### Credits
-Idea by Ashleigh Hull.
+Idea by [Ashleigh Hull](https://github.com/ashleyhull-versent).
