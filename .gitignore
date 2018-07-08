@@ -57,4 +57,7 @@ freeline_project_description.json
 # API secrets
 **/*/res/values/secrets.xml
 
+# Artwork
+00-artwork
+
 

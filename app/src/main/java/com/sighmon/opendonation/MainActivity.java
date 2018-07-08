@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
@@ -52,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         mainLinearLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         // To set an image background
 //        mainLinearLayout.setBackground(getDrawable(R.drawable.ic_launcher_background));
+
+        // Set a custom logo
+        // Copy your logo over the top of app/src/main/res/drawable/custom_logo.png
+        // And un-comment the next line
+//        setCustomLogo();
 
         // Set fullscreen
         hideSystemUI();
@@ -195,5 +201,14 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+    }
+
+    private void setCustomLogo() {
+        ImageView logo = (ImageView) findViewById(R.id.custom_logo);
+        logo.setImageResource(R.drawable.custom_logo);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int marginInDips = 15;
+        lp.setMargins(0, marginInDips, 0, marginInDips);
+        logo.setLayoutParams(lp);
     }
 }

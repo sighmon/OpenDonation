@@ -14,4 +14,5 @@
     <string name="currency_symbol">$</string>
     <string name="dialog_title_transaction_cancelled">Cancelled - No charge</string>
     <string name="dialog_message_transaction_cancelled">This donation was cancelled and no charge has been made.</string>
+    <string name="custom_logo_image_description">Logo of the company your donation is going to.</string>
 </resources>
