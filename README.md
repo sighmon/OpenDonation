@@ -3,11 +3,13 @@ An Open Source donation app for Android making use of the [Square](https://squar
 
 <img width="100%" src="OpenDonation_screenshots.jpg" />
 
-## Add a custom logo
+## Add a custom logo & background
 
 To add your own custom logo to the top of the donation box, create a transparent `.png` image and copy it over the top of: `app/src/main/res/drawable/custom_logo.png`.
 
 Then set the logo to appear in the file `MainActivity.java` by un-commenting out `setCustomLogo();`
+
+To change the background colour, edit `colorPrimary` in `app/src/main/res/values/colors.xml`.
 
 ## Register your app
 Don’t forget to register your app under your Square dev account: <https://connect.squareup.com/apps>
