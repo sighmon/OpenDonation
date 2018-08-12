@@ -27,6 +27,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+import static android.content.res.Configuration.ORIENTATION_UNDEFINED;
 import static com.squareup.sdk.pos.CurrencyCode.AUD;
 import static com.squareup.sdk.pos.CurrencyCode.USD;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         // Set a custom logo
         // Copy your logo over the top of app/src/main/res/drawable/custom_logo.png
         // And un-comment the next line
-//        setCustomLogo();
+        // setCustomLogo();
 
         // Set fullscreen
         hideSystemUI();
@@ -204,11 +206,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCustomLogo() {
-        ImageView logo = (ImageView) findViewById(R.id.custom_logo);
-        logo.setImageResource(R.drawable.custom_logo);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int marginInDips = 15;
-        lp.setMargins(0, marginInDips, 0, marginInDips);
-        logo.setLayoutParams(lp);
+        ImageView logo = findViewById(R.id.custom_logo);
+        if (getResources().getConfiguration().orientation == ORIENTATION_PORTRAIT || getResources().getConfiguration().orientation == ORIENTATION_UNDEFINED) {
+            // Set the portrait logo
+            logo.setImageResource(R.drawable.custom_logo);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int marginInDips = 15;
+            lp.setMargins(0, marginInDips, 0, marginInDips);
+            logo.setLayoutParams(lp);
+        } else {
+            // Set the landscape logo
+            logo.setImageResource(R.drawable.custom_logo_land);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int marginInDips = 15;
+            lp.setMargins(0, marginInDips, 0, marginInDips);
+            logo.setLayoutParams(lp);
+
+            // Reduce button margins to fit the description text
+            Button submitButton = findViewById(R.id.submitButton);
+            marginInDips = 10;
+            lp.setMargins(0, marginInDips, 0, marginInDips);
+            submitButton.setLayoutParams(lp);
+
+            // Set the landscape logo layout weight to 1 to show the landscape logo
+            final LinearLayout logoLayout  = findViewById(R.id.customLogoLinearLayout);
+            final LinearLayout donationLayout  = findViewById(R.id.donationInputLinearLayout);
+            if (logoLayout != null) {
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1.0f
+                );
+                logoLayout.setLayoutParams(param);
+                donationLayout.setLayoutParams(param);
+            }
+        }
     }
 }
