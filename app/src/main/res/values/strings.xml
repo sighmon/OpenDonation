@@ -5,8 +5,9 @@
     <string name="dialog_title_error">Error</string>
     <string name="dialog_message_start_transaction_error">Square Point of Sale is not installed</string>
     <string name="dialog_message_activity_error">Square Point of Sale was uninstalled or crashed</string>
+    <string name="dialog_message_success">Your donation of \$%1$d was successful.</string>
     <string name="dialog_message_success_client_transaction_id">Client transaction id:</string>
-    <string name="dialog_title_success">Success!</string>
+    <string name="dialog_title_success">Thank you 😃</string>
     <string name="dialog_title_error_already_in_progress">A transaction is already in progress</string>
     <string name="dialog_message_please_complete_current_string">Please complete the current transaction in Point of Sale.</string>
     <string name="dialog_title_error_colon">Error:</string>

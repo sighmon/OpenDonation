@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     // Set any global variables
     private Integer donationValue;
     private Integer transactionTimeout;
+    private Integer dialogAutoDismissTimeout;
+    private boolean showDialogs;
 
     public static final String TAG = "MainActivity";
 
@@ -76,8 +79,10 @@ public class MainActivity extends AppCompatActivity {
         // Setup default donation values
         Integer minimumDonationValue = 5;
         Integer maximumDonationValue = 99;
-        donationValue = 5;
+        donationValue = 5; // currently selected value
         transactionTimeout = 4; // in seconds
+        showDialogs = true; // set false to hide success dialogs
+        dialogAutoDismissTimeout = 10; // in seconds
 
         // Setup the donation amount picker
         NumberPicker donationAmountPicker = (NumberPicker) findViewById(R.id.donationAmount);
@@ -134,11 +139,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDialog(String title, String message, DialogInterface.OnClickListener listener) {
         Log.d("MainActivity", title + " " + message);
-        new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, listener)
-                .show();
+        // Show dialog if requested
+        if (showDialogs) {
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, listener);
+            final AlertDialog alert = dialog.create();
+            alert.show();
+
+            // Set auto-dismiss
+            new CountDownTimer(dialogAutoDismissTimeout * 1000, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    // Dismiss alert
+                    if (alert.isShowing()) {
+                        alert.dismiss();
+                    }
+                }
+            }.start();
+        }
     }
 
     // Result from Square
@@ -151,16 +176,20 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (resultCode == Activity.RESULT_OK) {
-                // TODO: thank you page
-                ChargeRequest.Success success = posClient.parseChargeSuccess(data);
-                String message = getString(R.string.dialog_message_success_client_transaction_id) + success.clientTransactionId;
+                // Thank you dialog message
+                String message = getString(R.string.dialog_message_success, donationValue);
                 showDialog(getString(R.string.dialog_title_success), message, null);
+
+                ChargeRequest.Success success = posClient.parseChargeSuccess(data);
+                String debugMessage = getString(R.string.dialog_message_success_client_transaction_id) + success.clientTransactionId;
+                Log.d("ChargeRequest", debugMessage);
             } else {
                 ChargeRequest.Error error = posClient.parseChargeError(data);
 
                 if (error.code == ChargeRequest.ErrorCode.TRANSACTION_ALREADY_IN_PROGRESS) {
                     String title = getString(R.string.dialog_title_error_already_in_progress);
                     String message = getString(R.string.dialog_message_please_complete_current_string);
+                    Log.d("ChargeRequest", message);
 
                     showDialog(title, message, new DialogInterface.OnClickListener() {
                         @Override public void onClick(DialogInterface dialog, int which) {
@@ -171,9 +200,12 @@ public class MainActivity extends AppCompatActivity {
                     });
                 } else if (error.code == ChargeRequest.ErrorCode.TRANSACTION_CANCELED) {
                     // TODO: cancelled page
-                    // showDialog(getString(R.string.dialog_title_transaction_cancelled), getString(R.string.dialog_message_transaction_cancelled), null);
+                    String message = getString(R.string.dialog_message_transaction_cancelled);
+                    Log.d("ChargeRequest", message);
+                    // showDialog(getString(R.string.dialog_title_transaction_cancelled), message, null);
                 } else {
                     // TODO: error page
+                    Log.d("ChargeRequest", error.debugDescription);
                     showDialog(getString(R.string.dialog_title_error_colon) + error.code, error.debugDescription, null);
                 }
             }

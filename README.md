@@ -15,6 +15,19 @@ Then set the logo to appear in the file `MainActivity.java` by un-commenting out
 
 To change the background colour, edit `colorPrimary` in `app/src/main/res/values/colors.xml`.
 
+## Other settings
+
+Open `MainActivity.java` and scroll to `Setup default donation values` where you can set:
+
+```Java
+minimumDonationValue = 5;
+maximumDonationValue = 99;
+donationValue = 5; // currently selected value
+transactionTimeout = 4; // in seconds
+showDialogs = true; // set false to hide success dialogs
+dialogAutoDismissTimeout = 10; // in seconds
+```
+
 ## Register your app
 Don’t forget to register your app under your Square dev account: <https://connect.squareup.com/apps>
 
